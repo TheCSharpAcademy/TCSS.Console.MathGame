@@ -48,37 +48,107 @@ switch (char.ToLower(userOption))
 
 void AdditionGame()
 {
-    Console.Clear();
-
     var random = new Random();
     var score = 0;
+    var numberOfRounds = 0;
 
-    int firstNumber = random.Next(1, 9);
-    int secondNumber = random.Next(1, 9);
+    int firstNumber;
+    int secondNumber;
 
-    Console.WriteLine($"{firstNumber} + {secondNumber}");
-    var result = Console.ReadLine();
+    Console.WriteLine($"How many times would you like to play?");
+    numberOfRounds = int.Parse(Console.ReadLine());
 
-    if (int.Parse(result) == firstNumber + secondNumber)
+    for (int i = 0; i < numberOfRounds; i++)
     {
-        Console.WriteLine("Correct!");
-        score++;
+        firstNumber = random.Next(1, 9);
+        secondNumber = random.Next(1, 9);
+
+        Console.WriteLine($"{firstNumber} + {secondNumber}");
+        var result = Console.ReadLine();
+
+        if (int.Parse(result) == firstNumber + secondNumber)
+        {
+            Console.WriteLine($"Your answer was correct.");
+            score++;
+        }
+        else
+        {
+            Console.WriteLine($"Your answer was incorrect.");
+        }
     }
-    else
+
+    Console.WriteLine($"Game over. Your final score is {score} out of {numberOfRounds}");
+}
+
+
+void SubtractionGame()
+{
+    var random = new Random();
+    var score = 0;
+    var numberOfRounds = 0;
+
+    int firstNumber;
+    int secondNumber;
+
+    Console.WriteLine($"How many times would you like to play?");
+    numberOfRounds = int.Parse(Console.ReadLine());
+
+    for (int i = 0; i < numberOfRounds; i++)
     {
-        Console.WriteLine("Incorrect!");
+        firstNumber = random.Next(1, 9);
+        secondNumber = random.Next(1, 9);
+
+        Console.WriteLine($"{firstNumber} - {secondNumber}");
+        var result = Console.ReadLine();
+
+        if (int.Parse(result) == firstNumber - secondNumber)
+        {
+            Console.WriteLine($"Your answer was correct.");
+            score++;
+        }
+        else
+        {
+            Console.WriteLine($"Your answer was incorrect.");
+        }
     }
+
+    Console.WriteLine($"Game over. Your final score is {score} out of {numberOfRounds}");
 }
 
-void SubtractionGame(string message)
+void MultiplicationGame()
 {
-    Console.WriteLine(message);
+    var random = new Random();
+    var score = 0;
+    var numberOfRounds = 0;
+
+    int firstNumber;
+    int secondNumber;
+
+    Console.WriteLine($"How many times would you like to play?");
+    numberOfRounds = int.Parse(Console.ReadLine());
+
+    for (int i = 0; i < numberOfRounds; i++)
+    {
+        firstNumber = random.Next(1, 9);
+        secondNumber = random.Next(1, 9);
+
+        Console.WriteLine($"{firstNumber} * {secondNumber}");
+        var result = Console.ReadLine();
+
+        if (int.Parse(result) == firstNumber * secondNumber)
+        {
+            Console.WriteLine($"Your answer was correct.");
+            score++;
+        }
+        else
+        {
+            Console.WriteLine($"Your answer was incorrect.");
+        }
+    }
+
+    Console.WriteLine($"Game over. Your final score is {score} out of {numberOfRounds}");
 }
 
-void MultiplicationGame(string message)
-{
-    Console.WriteLine(message);
-}
 
 void DivisionGame(string message)
 {
