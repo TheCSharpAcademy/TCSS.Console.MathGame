@@ -1,4 +1,6 @@
-﻿Console.WriteLine($"What's your name?");
+﻿using static System.Formats.Asn1.AsnWriter;
+
+Console.WriteLine($"What's your name?");
 string name = Console.ReadLine();
 DateTime date = DateTime.Now;
 int gamesPlayed = 0;
@@ -33,7 +35,7 @@ switch (char.ToLower(userOption))
         MultiplicationGame();
         break;
     case 'd':
-        DivisionGame("You're playing a division game");
+        DivisionGame();
         break;
     case 'v':
         ViewPreviousGames("List of Games");
@@ -50,13 +52,12 @@ void AdditionGame()
 {
     var random = new Random();
     var score = 0;
-    var numberOfRounds = 0;
 
     int firstNumber;
     int secondNumber;
 
     Console.WriteLine($"How many times would you like to play?");
-    numberOfRounds = int.Parse(Console.ReadLine());
+    var numberOfRounds = int.Parse(Console.ReadLine());
 
     for (int i = 0; i < numberOfRounds; i++)
     {
@@ -85,13 +86,12 @@ void SubtractionGame()
 {
     var random = new Random();
     var score = 0;
-    var numberOfRounds = 0;
 
     int firstNumber;
     int secondNumber;
 
     Console.WriteLine($"How many times would you like to play?");
-    numberOfRounds = int.Parse(Console.ReadLine());
+    var numberOfRounds = int.Parse(Console.ReadLine());
 
     for (int i = 0; i < numberOfRounds; i++)
     {
@@ -119,13 +119,12 @@ void MultiplicationGame()
 {
     var random = new Random();
     var score = 0;
-    var numberOfRounds = 0;
 
     int firstNumber;
     int secondNumber;
 
     Console.WriteLine($"How many times would you like to play?");
-    numberOfRounds = int.Parse(Console.ReadLine());
+    var numberOfRounds = int.Parse(Console.ReadLine());
 
     for (int i = 0; i < numberOfRounds; i++)
     {
@@ -150,9 +149,54 @@ void MultiplicationGame()
 }
 
 
-void DivisionGame(string message)
+void DivisionGame()
 {
-    Console.WriteLine(message);
+    var score = 0;
+
+    Console.WriteLine($"How many times would you like to play?");
+    var numberOfRounds = int.Parse(Console.ReadLine());
+
+    for (int i = 0; i < numberOfRounds; i++)
+    {
+        var divisionNumbers = GetDivisionNumbers();
+        var firstNumber = divisionNumbers[0];
+        var secondNumber = divisionNumbers[1];
+
+        Console.WriteLine($"{firstNumber} / {secondNumber}");
+        var result = Console.ReadLine();
+
+        if (int.Parse(result) == firstNumber / secondNumber)
+        {
+            Console.WriteLine($"Your answer was correct.");
+            score++;
+        }
+        else
+        {
+            Console.WriteLine($"Your answer was incorrect.");
+        }
+    }
+
+    Console.WriteLine($"Game over. Your final score is {score}");
+}
+
+int[] GetDivisionNumbers()
+{
+    var random = new Random();
+    var firstNumber = random.Next(1, 99);
+    var secondNumber = random.Next(1, 99);
+
+    var result = new int[2];
+
+    while (firstNumber % secondNumber != 0)
+    {
+        firstNumber = random.Next(1, 99);
+        secondNumber = random.Next(1, 99);
+    }
+
+    result[0] = firstNumber;
+    result[1] = secondNumber;
+
+    return result;
 }
 
 void ViewPreviousGames(string message)
