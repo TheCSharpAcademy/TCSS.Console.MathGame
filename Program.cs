@@ -24,7 +24,7 @@ userOption = Console.ReadKey().KeyChar;
 switch (char.ToLower(userOption))
 {
     case 'a':
-        AdditionGame("You're playing an addition game");
+        AdditionGame();
         break;
     case 's':
         SubtractionGame("You're playing a subtraction game");
@@ -46,9 +46,28 @@ switch (char.ToLower(userOption))
         break;
 }
 
-void AdditionGame(string message) 
+void AdditionGame()
 {
-    Console.WriteLine(message);
+    Console.Clear();
+
+    var random = new Random();
+    var score = 0;
+
+    int firstNumber = random.Next(1, 9);
+    int secondNumber = random.Next(1, 9);
+
+    Console.WriteLine($"{firstNumber} + {secondNumber}");
+    var result = Console.ReadLine();
+
+    if (int.Parse(result) == firstNumber + secondNumber)
+    {
+        Console.WriteLine("Correct!");
+        score++;
+    }
+    else
+    {
+        Console.WriteLine("Incorrect!");
+    }
 }
 
 void SubtractionGame(string message)
