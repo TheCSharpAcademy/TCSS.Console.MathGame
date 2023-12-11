@@ -24,19 +24,19 @@ userOption = Console.ReadKey().KeyChar;
 switch (char.ToLower(userOption))
 {
     case 'a':
-        Console.WriteLine("Addition Selected");
+        AdditionGame("You're playing an addition game");
         break;
     case 's':
-        Console.WriteLine("Subtraction selected");
+        SubtractionGame("You're playing a subtraction game");
         break;
     case 'm':
-        Console.WriteLine("Multiplication selected");
+        MultiplicationGame("You're playing a multiplication game");
         break;
     case 'd':
-        Console.WriteLine("Division selected");
+        DivisionGame("You're playing a division game");
         break;
     case 'v':
-        Console.WriteLine("View previous games selected");
+        ViewPreviousGames("List of Games");
         break;
     case 'q':
         Console.WriteLine("Goodbye");
@@ -44,5 +44,30 @@ switch (char.ToLower(userOption))
     default:
         Console.WriteLine("Invalid input");
         break;
+}
+
+void AdditionGame(string message) 
+{
+    Console.WriteLine(message);
+}
+
+void SubtractionGame(string message)
+{
+    Console.WriteLine(message);
+}
+
+void MultiplicationGame(string message)
+{
+    Console.WriteLine(message);
+}
+
+void DivisionGame(string message)
+{
+    Console.WriteLine(message);
+}
+
+void ViewPreviousGames(string message)
+{
+    Console.WriteLine(message);
 }
 
