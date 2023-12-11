@@ -1,6 +1,4 @@
-﻿using static System.Formats.Asn1.AsnWriter;
-
-Console.WriteLine($"What's your name?");
+﻿Console.WriteLine($"What's your name?");
 string name = Console.ReadLine();
 DateTime date = DateTime.Now;
 int gamesPlayed = 0;
@@ -11,7 +9,6 @@ bool isScoreEmpty = true;
 Console.WriteLine($"Hello {name}! Today is {date}. This is your math's game. It's great that you're working on improving yourself.\n");
 Console.WriteLine("Press any key to continue.");
 Console.ReadKey();
-Console.Clear();
 
 var isGameOn = true;
 
@@ -54,6 +51,7 @@ Q - Quit The Program");
             Console.WriteLine("Invalid input");
             break;
     }
+    gamesPlayed++;
 } while (isGameOn);
 
 void AdditionGame()
