@@ -1,10 +1,13 @@
-﻿Console.WriteLine($"What's your name?");
+﻿using static System.Formats.Asn1.AsnWriter;
+
+Console.WriteLine($"What's your name?");
 string name = Console.ReadLine();
 DateTime date = DateTime.Now;
 int gamesPlayed = 0;
 char userOption;
 decimal averageScore;
 bool isScoreEmpty = true;
+List<string> gamesHistory = new();
 
 Console.WriteLine($"Hello {name}! Today is {date}. This is your math's game. It's great that you're working on improving yourself.\n");
 Console.WriteLine("Press any key to continue.");
@@ -41,7 +44,7 @@ Q - Quit The Program");
             DivisionGame();
             break;
         case 'v':
-            ViewPreviousGames("List of Games");
+            ViewPreviousGames();
             break;
         case 'q':
             Console.WriteLine("Goodbye");
@@ -85,9 +88,11 @@ void AdditionGame()
         }
     }
 
-    Console.WriteLine($"Game over. Your final score is {score} out of {numberOfRounds}");
-}
+    Console.WriteLine($"Game over. Your final score is {score} out of {numberOfRounds}. Press any key to go back to main menu.");
+    Console.ReadKey();
 
+    gamesHistory.Add($"{DateTime.Now} - Addition - Score: {score} out of {numberOfRounds}");
+}
 
 void SubtractionGame()
 {
@@ -120,7 +125,10 @@ void SubtractionGame()
         }
     }
 
-    Console.WriteLine($"Game over. Your final score is {score} out of {numberOfRounds}");
+    Console.WriteLine($"Game over. Your final score is {score} out of {numberOfRounds}. Press any key to go back to main menu.");
+    Console.ReadKey();
+
+    gamesHistory.Add($"{DateTime.Now} - Subtraction - Score: {score} out of {numberOfRounds}");
 }
 
 void MultiplicationGame()
@@ -154,7 +162,10 @@ void MultiplicationGame()
         }
     }
 
-    Console.WriteLine($"Game over. Your final score is {score} out of {numberOfRounds}");
+    Console.WriteLine($"Game over. Your final score is {score} out of {numberOfRounds}. Press any key to go back to main menu.");
+    Console.ReadKey();
+
+    gamesHistory.Add($"{DateTime.Now} - Multiplication - Score: {score} out of {numberOfRounds}");
 }
 
 void DivisionGame()
@@ -185,7 +196,10 @@ void DivisionGame()
         }
     }
 
-    Console.WriteLine($"Game over. Your final score is {score}");
+    Console.WriteLine($"Game over. Your final score is {score}. Press any key to go back to main menu.");
+    Console.ReadKey();
+
+    gamesHistory.Add($"{DateTime.Now} - Division - Score: {score} out of {numberOfRounds}");
 }
 
 int[] GetDivisionNumbers()
@@ -208,8 +222,25 @@ int[] GetDivisionNumbers()
     return result;
 }
 
-void ViewPreviousGames(string message)
+void ViewPreviousGames()
 {
-    Console.WriteLine(message);
+    Console.Clear();
+    if (gamesHistory.Count == 0)
+    {
+        Console.WriteLine("No game have been played yet. Press any key to go back to main menu.");
+        Console.ReadKey();
+        return;
+    }
+
+    Console.WriteLine("Games List");
+    Console.WriteLine("------------------------------------");
+    foreach (var game in gamesHistory)
+    {
+        Console.WriteLine(game);
+    }
+    Console.WriteLine("------------------------------------");
+
+    Console.WriteLine($"\nPress any key to go back to main menu.");
+    Console.ReadKey();
 }
 
