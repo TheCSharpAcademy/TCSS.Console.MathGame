@@ -50,13 +50,12 @@ void AdditionGame()
 {
     var random = new Random();
     var score = 0;
-    var numberOfRounds = 0;
 
     int firstNumber;
     int secondNumber;
 
     Console.WriteLine($"How many times would you like to play?");
-    numberOfRounds = int.Parse(Console.ReadLine());
+    var numberOfRounds = int.Parse(Console.ReadLine());
 
     for (int i = 0; i < numberOfRounds; i++)
     {
@@ -85,13 +84,12 @@ void SubtractionGame()
 {
     var random = new Random();
     var score = 0;
-    var numberOfRounds = 0;
 
     int firstNumber;
     int secondNumber;
 
     Console.WriteLine($"How many times would you like to play?");
-    numberOfRounds = int.Parse(Console.ReadLine());
+    var numberOfRounds = int.Parse(Console.ReadLine());
 
     for (int i = 0; i < numberOfRounds; i++)
     {
@@ -119,13 +117,12 @@ void MultiplicationGame()
 {
     var random = new Random();
     var score = 0;
-    var numberOfRounds = 0;
 
     int firstNumber;
     int secondNumber;
 
     Console.WriteLine($"How many times would you like to play?");
-    numberOfRounds = int.Parse(Console.ReadLine());
+    var numberOfRounds = int.Parse(Console.ReadLine());
 
     for (int i = 0; i < numberOfRounds; i++)
     {
