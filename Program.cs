@@ -12,8 +12,14 @@ Console.WriteLine($"Hello {name}! Today is {date}. This is your math's game. It'
 Console.WriteLine("Press any key to continue.");
 Console.ReadKey();
 Console.Clear();
-Console.WriteLine($"Games played: {gamesPlayed}");
-Console.WriteLine(@"What game would you like to play?
+
+var isGameOn = true;
+
+do
+{
+    Console.Clear();
+    Console.WriteLine($"Games played: {gamesPlayed}");
+    Console.WriteLine(@"What game would you like to play?
 A - Addition
 S - Subtraction
 M - Multiplication
@@ -21,35 +27,38 @@ D - Division
 V - View Previous Games
 Q - Quit The Program");
 
-userOption = Console.ReadKey().KeyChar;
+    userOption = Console.ReadKey().KeyChar;
 
-switch (char.ToLower(userOption))
-{
-    case 'a':
-        AdditionGame();
-        break;
-    case 's':
-        SubtractionGame();
-        break;
-    case 'm':
-        MultiplicationGame();
-        break;
-    case 'd':
-        DivisionGame();
-        break;
-    case 'v':
-        ViewPreviousGames("List of Games");
-        break;
-    case 'q':
-        Console.WriteLine("Goodbye");
-        break;
-    default:
-        Console.WriteLine("Invalid input");
-        break;
-}
+    switch (char.ToLower(userOption))
+    {
+        case 'a':
+            AdditionGame();
+            break;
+        case 's':
+            SubtractionGame();
+            break;
+        case 'm':
+            MultiplicationGame();
+            break;
+        case 'd':
+            DivisionGame();
+            break;
+        case 'v':
+            ViewPreviousGames("List of Games");
+            break;
+        case 'q':
+            Console.WriteLine("Goodbye");
+            isGameOn = false;
+            break;
+        default:
+            Console.WriteLine("Invalid input");
+            break;
+    }
+} while (isGameOn);
 
 void AdditionGame()
 {
+    Console.Clear();
     var random = new Random();
     var score = 0;
 
@@ -84,6 +93,7 @@ void AdditionGame()
 
 void SubtractionGame()
 {
+    Console.Clear();
     var random = new Random();
     var score = 0;
 
@@ -117,6 +127,7 @@ void SubtractionGame()
 
 void MultiplicationGame()
 {
+    Console.Clear();
     var random = new Random();
     var score = 0;
 
@@ -148,9 +159,9 @@ void MultiplicationGame()
     Console.WriteLine($"Game over. Your final score is {score} out of {numberOfRounds}");
 }
 
-
 void DivisionGame()
 {
+    Console.Clear();
     var score = 0;
 
     Console.WriteLine($"How many times would you like to play?");
