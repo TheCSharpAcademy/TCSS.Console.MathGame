@@ -27,10 +27,10 @@ switch (char.ToLower(userOption))
         AdditionGame();
         break;
     case 's':
-        SubtractionGame("You're playing a subtraction game");
+        SubtractionGame();
         break;
     case 'm':
-        MultiplicationGame("You're playing a multiplication game");
+        MultiplicationGame();
         break;
     case 'd':
         DivisionGame("You're playing a division game");
