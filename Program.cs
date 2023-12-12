@@ -1,10 +1,8 @@
 ﻿Console.WriteLine($"What's your name?");
 string name = Console.ReadLine();
 DateTime date = DateTime.Now;
-int gamesPlayed = 0;
 char userOption;
 decimal averageScore;
-bool isScoreEmpty = true;
 List<string> gamesHistory = new();
 
 Console.WriteLine($"Hello {name}! Today is {date}. This is your math's game. It's great that you're working on improving yourself.\n");
@@ -16,7 +14,7 @@ var isGameOn = true;
 do
 {
     Console.Clear();
-    Console.WriteLine($"Games played: {gamesPlayed}");
+    Console.WriteLine($"Games played: {gamesHistory.Count}");
     Console.WriteLine(@"What game would you like to play?
 A - Addition
 S - Subtraction
@@ -55,7 +53,6 @@ Q - Quit The Program");
             Console.WriteLine("Invalid input");
             break;
     }
-    gamesPlayed++;
 } while (isGameOn);
 
 void PlayGame(char gameType, bool isRandom = false)
