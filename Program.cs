@@ -58,23 +58,18 @@ Q - Quit The Program");
 void AdditionGame()
 {
     Console.Clear();
-    var random = new Random();
     var score = 0;
-
-    int firstNumber;
-    int secondNumber;
 
     Console.WriteLine($"How many times would you like to play?");
     var numberOfRounds = int.Parse(Console.ReadLine());
 
-    var difficultyLevel = ChooseDifficultyLevel();
+    char difficultyLevel = ChooseDifficultyLevel();
 
     for (int i = 0; i < numberOfRounds; i++)
     {
-        int[] getRange = GetRange(difficultyLevel);
-
-        firstNumber = random.Next(getRange[0], getRange[1]);
-        secondNumber = random.Next(getRange[0], getRange[1]);
+        var operands = GetOperands(difficultyLevel, 'a');
+        var firstNumber = operands[0];
+        var secondNumber = operands[1];
 
         Console.WriteLine($"{firstNumber} + {secondNumber}");
         var result = Console.ReadLine();
@@ -96,69 +91,21 @@ void AdditionGame()
     gamesHistory.Add($"{DateTime.Now} - Addition - Difficulty: {char.ToUpper(difficultyLevel)} - Score: {score} out of {numberOfRounds}");
 }
 
-int[] GetRange(char difficultyLevel)
-{
-    Random random = new();
-    var result = new int[2];
-
-    switch (difficultyLevel)
-    {
-        case 'e':
-            result[0] = 1;
-            result[1] = 9;
-            break;
-        case 'm':
-            result[0] = 10;
-            result[1] = 99;
-            break;
-        case 'h':
-            result[0] = 100;
-            result[1] = 999;
-            break;
-    }
-
-    return result;
-}
-
-char ChooseDifficultyLevel()
-{
-    Console.WriteLine(@$"
-
-Choose a difficulty level:
-E - Easy
-M - Medium
-H - Hard
-
-");
-    var level = char.ToLower(Console.ReadKey().KeyChar);
-    Console.WriteLine();
-    var options = new char[] { 'e', 'm', 'h' };
-
-    while(!options.Contains(level))
-    {
-        Console.WriteLine("Invalid Option. Try again");
-        level = char.ToLower(Console.ReadKey().KeyChar);
-    }
-
-    return level;
-}
-
 void SubtractionGame()
 {
     Console.Clear();
-    var random = new Random();
     var score = 0;
-
-    int firstNumber;
-    int secondNumber;
 
     Console.WriteLine($"How many times would you like to play?");
     var numberOfRounds = int.Parse(Console.ReadLine());
 
+    char difficultyLevel = ChooseDifficultyLevel();
+
     for (int i = 0; i < numberOfRounds; i++)
     {
-        firstNumber = random.Next(1, 9);
-        secondNumber = random.Next(1, 9);
+        var operands = GetOperands(difficultyLevel, 's');
+        var firstNumber = operands[0];
+        var secondNumber = operands[1];
 
         Console.WriteLine($"{firstNumber} - {secondNumber}");
         var result = Console.ReadLine();
@@ -177,25 +124,24 @@ void SubtractionGame()
     Console.WriteLine($"Game over. Your final score is {score} out of {numberOfRounds}. Press any key to go back to main menu.");
     Console.ReadKey();
 
-    gamesHistory.Add($"{DateTime.Now} - Subtraction - Score: {score} out of {numberOfRounds}");
+    gamesHistory.Add($"{DateTime.Now} - Subtraction - Difficulty: {char.ToUpper(difficultyLevel)} - Score: {score} out of {numberOfRounds}");
 }
 
 void MultiplicationGame()
 {
     Console.Clear();
-    var random = new Random();
     var score = 0;
-
-    int firstNumber;
-    int secondNumber;
 
     Console.WriteLine($"How many times would you like to play?");
     var numberOfRounds = int.Parse(Console.ReadLine());
 
+    char difficultyLevel = ChooseDifficultyLevel();
+
     for (int i = 0; i < numberOfRounds; i++)
     {
-        firstNumber = random.Next(1, 9);
-        secondNumber = random.Next(1, 9);
+        var operands = GetOperands(difficultyLevel, 'm');
+        var firstNumber = operands[0];
+        var secondNumber = operands[1];
 
         Console.WriteLine($"{firstNumber} * {secondNumber}");
         var result = Console.ReadLine();
@@ -214,7 +160,7 @@ void MultiplicationGame()
     Console.WriteLine($"Game over. Your final score is {score} out of {numberOfRounds}. Press any key to go back to main menu.");
     Console.ReadKey();
 
-    gamesHistory.Add($"{DateTime.Now} - Multiplication - Score: {score} out of {numberOfRounds}");
+    gamesHistory.Add($"{DateTime.Now} - Multiplication - Difficulty: {char.ToUpper(difficultyLevel)} - Score: {score} out of {numberOfRounds}");
 }
 
 void DivisionGame()
@@ -225,11 +171,13 @@ void DivisionGame()
     Console.WriteLine($"How many times would you like to play?");
     var numberOfRounds = int.Parse(Console.ReadLine());
 
+    char difficultyLevel = ChooseDifficultyLevel();
+
     for (int i = 0; i < numberOfRounds; i++)
     {
-        var divisionNumbers = GetDivisionNumbers();
-        var firstNumber = divisionNumbers[0];
-        var secondNumber = divisionNumbers[1];
+        var operands = GetOperands(difficultyLevel, 'd');
+        var firstNumber = operands[0];
+        var secondNumber = operands[1];
 
         Console.WriteLine($"{firstNumber} / {secondNumber}");
         var result = Console.ReadLine();
@@ -248,21 +196,38 @@ void DivisionGame()
     Console.WriteLine($"Game over. Your final score is {score}. Press any key to go back to main menu.");
     Console.ReadKey();
 
-    gamesHistory.Add($"{DateTime.Now} - Division - Score: {score} out of {numberOfRounds}");
+    gamesHistory.Add($"{DateTime.Now} - Division - Difficulty: {char.ToUpper(difficultyLevel)} - Score: {score} out of {numberOfRounds}");
 }
 
-int[] GetDivisionNumbers()
+int[] GetOperands(char difficultyLevel, char gameType)
 {
+    int topOfRange = 0;
+
+    switch (difficultyLevel)
+    {
+        case 'e':
+            topOfRange = gameType == 'd' ? 99 : 9;
+            break;
+        case 'm':
+            topOfRange = gameType == 'd' ? 999 : 99;
+            break;
+        case 'h':
+            topOfRange = gameType == 'd' ? 9999 : 999;
+            break;
+    }
     var random = new Random();
-    var firstNumber = random.Next(1, 99);
-    var secondNumber = random.Next(1, 99);
+    var firstNumber = random.Next(1, topOfRange);
+    var secondNumber = random.Next(1, topOfRange);
 
     var result = new int[2];
 
-    while (firstNumber % secondNumber != 0)
+    if (gameType == 'd')
     {
-        firstNumber = random.Next(1, 99);
-        secondNumber = random.Next(1, 99);
+        while (firstNumber % secondNumber != 0)
+        {
+            firstNumber = random.Next(1, topOfRange);
+            secondNumber = random.Next(1, topOfRange);
+        }
     }
 
     result[0] = firstNumber;
@@ -293,3 +258,49 @@ void ViewPreviousGames()
     Console.ReadKey();
 }
 
+char ChooseDifficultyLevel()
+{
+    Console.WriteLine(@$"
+
+Choose a difficulty level:
+E - Easy
+M - Medium
+H - Hard
+
+");
+    var level = char.ToLower(Console.ReadKey().KeyChar);
+    Console.WriteLine();
+    var options = new char[] { 'e', 'm', 'h' };
+
+    while (!options.Contains(level))
+    {
+        Console.WriteLine("Invalid Option. Try again");
+        level = char.ToLower(Console.ReadKey().KeyChar);
+    }
+
+    return level;
+}
+
+int[] GetRange(char difficultyLevel)
+{
+    Random random = new();
+    var result = new int[2];
+
+    switch (difficultyLevel)
+    {
+        case 'e':
+            result[0] = 1;
+            result[1] = 9;
+            break;
+        case 'm':
+            result[0] = 10;
+            result[1] = 99;
+            break;
+        case 'h':
+            result[0] = 100;
+            result[1] = 999;
+            break;
+    }
+
+    return result;
+}
