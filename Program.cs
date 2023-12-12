@@ -106,6 +106,8 @@ void SubtractionGame()
 
     char difficultyLevel = ChooseDifficultyLevel();
 
+    var startTime = DateTime.Now;
+
     for (int i = 0; i < numberOfRounds; i++)
     {
         var operands = GetOperands(difficultyLevel, 's');
@@ -126,10 +128,13 @@ void SubtractionGame()
         }
     }
 
-    Console.WriteLine($"Game over. Your final score is {score} out of {numberOfRounds}. Press any key to go back to main menu.");
+    var endTime = DateTime.Now;
+    TimeSpan totalTime = endTime - startTime;
+
+    Console.WriteLine($"Game over. Your final score is {score} out of {numberOfRounds} in {totalTime.TotalSeconds:0.00} seconds. Press any key to go back to main menu.");
     Console.ReadKey();
 
-    gamesHistory.Add($"{DateTime.Now} - Subtraction - Difficulty: {char.ToUpper(difficultyLevel)} - Score: {score} out of {numberOfRounds}");
+    gamesHistory.Add($"{DateTime.Now} - Subtraction - Difficulty: {char.ToUpper(difficultyLevel)} - Score: {score} out of {numberOfRounds} - Time: {totalTime.TotalSeconds:0.00}s");
 }
 
 void MultiplicationGame()
@@ -141,6 +146,8 @@ void MultiplicationGame()
     var numberOfRounds = int.Parse(Console.ReadLine());
 
     char difficultyLevel = ChooseDifficultyLevel();
+
+    var startTime = DateTime.Now;
 
     for (int i = 0; i < numberOfRounds; i++)
     {
@@ -162,10 +169,13 @@ void MultiplicationGame()
         }
     }
 
-    Console.WriteLine($"Game over. Your final score is {score} out of {numberOfRounds}. Press any key to go back to main menu.");
+    var endTime = DateTime.Now;
+    TimeSpan totalTime = endTime - startTime;
+
+    Console.WriteLine($"Game over. Your final score is {score} out of {numberOfRounds} in {totalTime.TotalSeconds:0.00} seconds. Press any key to go back to main menu.");
     Console.ReadKey();
 
-    gamesHistory.Add($"{DateTime.Now} - Multiplication - Difficulty: {char.ToUpper(difficultyLevel)} - Score: {score} out of {numberOfRounds}");
+    gamesHistory.Add($"{DateTime.Now} - Multiplication - Difficulty: {char.ToUpper(difficultyLevel)} - Score: {score} out of {numberOfRounds} - Time: {totalTime.TotalSeconds:0.00}s");
 }
 
 void DivisionGame()
@@ -177,6 +187,8 @@ void DivisionGame()
     var numberOfRounds = int.Parse(Console.ReadLine());
 
     char difficultyLevel = ChooseDifficultyLevel();
+
+    var startTime = DateTime.Now;
 
     for (int i = 0; i < numberOfRounds; i++)
     {
@@ -198,10 +210,13 @@ void DivisionGame()
         }
     }
 
-    Console.WriteLine($"Game over. Your final score is {score}. Press any key to go back to main menu.");
+    var endTime = DateTime.Now;
+    TimeSpan totalTime = endTime - startTime;
+
+    Console.WriteLine($"Game over. Your final score is {score} out of {numberOfRounds} in {totalTime.TotalSeconds:0.00} seconds. Press any key to go back to main menu.");
     Console.ReadKey();
 
-    gamesHistory.Add($"{DateTime.Now} - Division - Difficulty: {char.ToUpper(difficultyLevel)} - Score: {score} out of {numberOfRounds}");
+    gamesHistory.Add($"{DateTime.Now} - Division - Difficulty: {char.ToUpper(difficultyLevel)} - Score: {score} out of {numberOfRounds} - Time: {totalTime.TotalSeconds:0.00}s");
 }
 
 int[] GetOperands(char difficultyLevel, char gameType)
