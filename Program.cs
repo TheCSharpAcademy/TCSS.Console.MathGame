@@ -1,6 +1,4 @@
-﻿using static System.Formats.Asn1.AsnWriter;
-
-Console.WriteLine($"What's your name?");
+﻿Console.WriteLine($"What's your name?");
 string name = Console.ReadLine();
 DateTime date = DateTime.Now;
 int gamesPlayed = 0;
@@ -69,10 +67,14 @@ void AdditionGame()
     Console.WriteLine($"How many times would you like to play?");
     var numberOfRounds = int.Parse(Console.ReadLine());
 
+    var difficultyLevel = ChooseDifficultyLevel();
+
     for (int i = 0; i < numberOfRounds; i++)
     {
-        firstNumber = random.Next(1, 9);
-        secondNumber = random.Next(1, 9);
+        int[] getRange = GetRange(difficultyLevel);
+
+        firstNumber = random.Next(getRange[0], getRange[1]);
+        secondNumber = random.Next(getRange[0], getRange[1]);
 
         Console.WriteLine($"{firstNumber} + {secondNumber}");
         var result = Console.ReadLine();
@@ -91,7 +93,54 @@ void AdditionGame()
     Console.WriteLine($"Game over. Your final score is {score} out of {numberOfRounds}. Press any key to go back to main menu.");
     Console.ReadKey();
 
-    gamesHistory.Add($"{DateTime.Now} - Addition - Score: {score} out of {numberOfRounds}");
+    gamesHistory.Add($"{DateTime.Now} - Addition - Difficulty: {char.ToUpper(difficultyLevel)} - Score: {score} out of {numberOfRounds}");
+}
+
+int[] GetRange(char difficultyLevel)
+{
+    Random random = new();
+    var result = new int[2];
+
+    switch (difficultyLevel)
+    {
+        case 'e':
+            result[0] = 1;
+            result[1] = 9;
+            break;
+        case 'm':
+            result[0] = 10;
+            result[1] = 99;
+            break;
+        case 'h':
+            result[0] = 100;
+            result[1] = 999;
+            break;
+    }
+
+    return result;
+}
+
+char ChooseDifficultyLevel()
+{
+    Console.WriteLine(@$"
+
+Choose a difficulty level:
+E - Easy
+M - Medium
+H - Hard
+
+");
+    var level = char.ToLower(Console.ReadKey().KeyChar);
+    Console.WriteLine();
+    var options = new char[] { 'e', 'm', 'h' };
+
+    while(!options.Contains(level))
+    {
+        Console.WriteLine("Invalid Option. Try again");
+        level = char.ToLower(Console.ReadKey().KeyChar);
+    }
+
+    return level;
 }
 
 void SubtractionGame()
