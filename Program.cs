@@ -65,6 +65,8 @@ void AdditionGame()
 
     char difficultyLevel = ChooseDifficultyLevel();
 
+    var startTime = DateTime.Now;
+
     for (int i = 0; i < numberOfRounds; i++)
     {
         var operands = GetOperands(difficultyLevel, 'a');
@@ -85,10 +87,13 @@ void AdditionGame()
         }
     }
 
-    Console.WriteLine($"Game over. Your final score is {score} out of {numberOfRounds}. Press any key to go back to main menu.");
+    var endTime = DateTime.Now;
+    TimeSpan totalTime = endTime - startTime;
+
+    Console.WriteLine($"Game over. Your final score is {score} out of {numberOfRounds} in {totalTime.TotalSeconds:0.00} seconds. Press any key to go back to main menu.");
     Console.ReadKey();
 
-    gamesHistory.Add($"{DateTime.Now} - Addition - Difficulty: {char.ToUpper(difficultyLevel)} - Score: {score} out of {numberOfRounds}");
+    gamesHistory.Add($"{DateTime.Now} - Addition - Difficulty: {char.ToUpper(difficultyLevel)} - Score: {score} out of {numberOfRounds} - Time: {totalTime.TotalSeconds:0.00}s");
 }
 
 void SubtractionGame()
